@@ -1,0 +1,63 @@
+.bg-side{
+    background-color: #391D34;
+    color: white;
+    height: 100vh;
+    
+
+}
+.header{
+    border-bottom: 1px solid white;
+    padding: 20px;
+    text-align: center;
+}
+
+.body-form{
+    padding: 20px;
+}
+
+.body-form h2{
+    text-align: center;
+}
+
+.body-form p{
+    text-align: center;
+    text-size: 24px;
+}
+
+.font-logo{
+    margin-left: 10px;
+    font-size: 40px;
+    
+}
+
+
+.btn-custom-primary{
+    background-color: #3D7B80;
+    border: none;
+    box-shadow: 2px 2px 5px 1px black;
+    color: white;
+    font-size: 20px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+
+}
+
+.link-float{
+
+    text-decoration: none;
+    float: right;
+    margin: 20px;
+    font-size: 20px;
+}
+
+.form-title{
+    font-size: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.side-logo{
+    text-align: center;
+    margin-top: 60px;    
+}

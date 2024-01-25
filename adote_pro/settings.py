@@ -134,12 +134,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # DJANGO MESSAGES
 
-MESSAGES_TAGS = {
-    constants.DEBUG:'alert-primary',
-    constants.ERROR:'alert-danger',
-    constants.SUCCESS:'alert-success',
-    constants.INFO:'alert-info',
-    constants.WARNING:'alert-warning',
+MESSAGE_TAGS = {
+    constants.DEBUG: 'alert-primary',
+    constants.ERROR: 'alert-danger',
+    constants.SUCCESS: 'alert-success',
+    constants.INFO: 'alert-info',
+    constants.WARNING: 'alert-warning',
 }
 
 AUTH_USER_MODEL = 'adote_app.User'

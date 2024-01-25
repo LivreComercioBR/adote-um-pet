@@ -1,7 +1,8 @@
 from django.urls import path
-from adote_app import views
+from . import views
 
 urlpatterns = [
-    path('cadastro/', views.cadastro, name='cadastro'),
-    path('logar/', views.logar, name='logar'),
+    path('cadastro/', views.cadastro, name='cadastro'),  # type: ignore
+    path('logar/', views.logar, name='logar'),  # type: ignore
+    path('sair/', views.sair, name='sair')  # type: ignore
 ]
