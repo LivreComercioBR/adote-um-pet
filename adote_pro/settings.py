@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'adote_app',
     'admin_object_actions',
+    'adocao',
 ]
 
 MIDDLEWARE = [

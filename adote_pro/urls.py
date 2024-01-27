@@ -26,6 +26,8 @@ from adote_pro.settings import MEDIA_ROOT, MEDIA_URL, STATIC_ROOT
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('adote_app.urls')),
-    path('', lambda request: redirect('/auth/cadastro'))
+    path('', lambda request: redirect('/auth/cadastro')),
+    path('adote/', include('adocao.urls')),
+
 
 ] + static(settings.MEDIA_URL, document_root=MEDIA_ROOT) + static(settings.STATIC_URL, document_root=STATIC_ROOT)
