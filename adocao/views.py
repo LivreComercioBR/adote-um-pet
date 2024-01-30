@@ -52,7 +52,7 @@ def divulgar(request):
             pet.save()
             messages.add_message(request, constants.SUCCESS,
                                  'Pet cadastrado com sucesso!')
-            return redirect('/')
+            return redirect('/adote/meu_pet')
 
         except Exception as error:
             messages.add_message(request, constants.ERROR,
@@ -70,7 +70,7 @@ def remover_pet(request, id):
     pet = Pet.objects.get(id=id)
     if not pet.usuario == request.user:
         messages.add_message(request, constants.ERROR, 'Esse pet não é seu!')
-        return redirect('/divulgar/seus_pets')
+        return redirect('/adote/meu_pet')
 
     pet.delete()
     messages.add_message(request, constants.SUCCESS,

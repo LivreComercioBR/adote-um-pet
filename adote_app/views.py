@@ -65,6 +65,7 @@ def cadastro(request):
         except Exception as error:
             messages.add_message(request, constants.ERROR,
                                  f'O erro encontrado foi {error.__class__}')
+            return redirect('/auth/cadastro')
 
 
 def logar(request):
@@ -79,14 +80,14 @@ def logar(request):
         if not user:
             messages.add_message(request, constants.ERROR,
                                  'Ops! Usuário ou senha inválidos!')
-            return redirect('autenticacao/logar')
+            return redirect('/auth/logar')
         else:
             auth.login(request, user)
-            return redirect("/")
+            return redirect("/adote/divulgar")
 
 
 def sair(request):
     auth.logout(request)
     messages.add_message(request, constants.INFO,
                          'Obrigado por passar um tempo conosco. Volte sempre!')
-    return redirect('/autenticacao/logar')
+    return redirect('/auth/logar')

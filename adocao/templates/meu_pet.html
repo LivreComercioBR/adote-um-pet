@@ -33,17 +33,13 @@
                     <br>
                     <hr>
                     <a role="button" href="{% url 'sair'  %}" class="btn btn-secondary links-site">Sair</a>
-                    <br>
-                    <hr>
-                    
-                    
+                   
                 </div>
 
                 <div class="col-md">
                     <div class="wrapper">
                         <div class="box width80">
                             {% if messages %}
-                                <br>
                                 {% for message in messages %}
                                     <div class="alert {{message.tags}}">
                                         {{message}}

@@ -58,15 +58,15 @@ def processa_pedido_adocao(request, id_pedido):
 
         pedido = PedidoAdocao.objects.get(id=id_pedido)
 
-        pet = Pet.objects.filter(id=pedido.pet_id)
+        pet = Pet.objects.filter(id=pedido.pet_id)  # type: ignore
 
         if status == "A":
             pedido.status = "AP"
-            resposta = 'Olá, seu pedido de adoção foi aprovado! Parabéns!'
+            message = 'Olá, seu pedido de adoção foi aprovado! Parabéns!'
 
         elif status == "R":
             pedido.status = "R"
-            resposta = 'Olá, lamentamos mas o seu pedido de adoção foi recusado!'
+            message = 'Olá, lamentamos mas o seu pedido de adoção foi recusado!'
 
         pedido.save()
 
@@ -80,7 +80,7 @@ def processa_pedido_adocao(request, id_pedido):
         meu_email = send_mail(
 
             subject="Status do seu pedido de adoção",
-            message="Seu pedido foi aceito! Parabéns!",
+            message=message,
             from_email="ronaldocorreiadesouza@gmail.com",
             recipient_list=[pedido.usuario.email,],)
         messages.add_message(request, constants.SUCCESS,
