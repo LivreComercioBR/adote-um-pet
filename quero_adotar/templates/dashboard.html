@@ -1,0 +1,94 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'autenticacao/css/cadastro.css' %}" rel="stylesheet">
+    <link href="{% static 'adocao/css/novo_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'adocao/css/meu_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'quero_adotar/css/listar_pets.css' %}" rel="stylesheet">
+    </head>
+    <body>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 bg-side sidebar ">
+                    <h2>LIVRE ADOÇÃO</h2>
+                    <hr>
+
+                    <a role="button" href="{% url 'listar_pets' %}" class="btn btn-secondary links-site">Home</a>
+                    <br>
+                    <hr>
+                    <a role="button" href="{% url 'listar_pets' %}" class="btn btn-secondary links-site">Ver Pets</a>
+                    <br>
+                    <hr>
+                    <a role="button" href="{% url 'divulgar' %}" class="btn btn-secondary links-site">Divulgar</a>
+                    <br>
+                    <hr>
+                    <a role="button" href="{% url 'meu_pet' %}" class="btn btn-secondary links-site">Meus Pets</a>
+                    <br>
+                    <hr>
+                    <a role="button" href="{% url 'ver_pedido_adocao' %}" class="btn btn-secondary links-site">Ver Pedidos de Adoção</a>
+                    <br>
+                    <hr>
+                    <a role="button" href="{% url 'sair'  %}" class="btn btn-secondary links-site">Sair</a>
+                    <br>
+                    <hr>
+                   
+                    
+                </div>
+
+                <div style="padding:60px" class="col-md">
+
+                    <h3 class="font-vinho">Quantidade de Adoções por Raça.</h3>
+                     <div style="width: 60%;">
+                        <canvas id="myChart"></canvas>
+                    </div>  
+                </div>
+
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+
+            fetch("/quero_adotar/mostrar_grafico/",{
+                method: 'GET',
+            }).then(function(result){
+                return result.json()
+            }).then(function(data_adocoes){
+               
+                const data = {
+                    labels: data_adocoes['labels'],
+                    datasets: [{
+                    label: 'Adoções',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: data_adocoes['qtd_adocoes'],
+                    }]
+                };
+    
+                const config = {
+                    type: 'line',
+                    data: data,
+                    options: {}
+                };
+    
+                const myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+                );
+    
+    
+            })
+          
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+
+</html>
