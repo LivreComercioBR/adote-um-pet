@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.messages import constants
 from adocao.models import Pet, Raca, Tag
+from quero_adotar.models import PedidoAdocao
 
 
 def divulgar(request):
@@ -44,16 +45,46 @@ def divulgar(request):
             )
             pet.save()
 
-            # for tag_id in tags:
-            #     tag = Tag.objects.get(id=tag_id)
-            #     pet.tags.add(tag)
+            for tag_id in tags:
+                tag = Tag.objects.get(id=tag_id)
+                pet.tags.add(tag)
 
-            # pet.save()
-            # messages.add_message(request, constants.SUCCESS,
-            #                      'Pet cadastrado com sucesso!')
+            pet.save()
+            messages.add_message(request, constants.SUCCESS,
+                                 'Pet cadastrado com sucesso!')
             return redirect('/')
 
         except Exception as error:
             messages.add_message(request, constants.ERROR,
                                  f'A causa do erro foi {error.__cause__}')
             return redirect('/adote/divulgar')
+
+
+def meu_pet(request):
+    if request.method == "GET":
+        pets = Pet.objects.filter(usuario=request.user)
+        return render(request, 'meu_pet.html', {'pets': pets})
+
+
+def remover_pet(request, id):
+    pet = Pet.objects.get(id=id)
+    if not pet.usuario == request.user:
+        messages.add_message(request, constants.ERROR, 'Esse pet não é seu!')
+        return redirect('/divulgar/seus_pets')
+
+    pet.delete()
+    messages.add_message(request, constants.SUCCESS,
+                         'Pet removido com sucesso!')
+    return redirect('/adote/meu_pet')
+
+
+def ver_pedido_adocao(request):
+    if request.method == "GET":
+        pedidos = PedidoAdocao.objects.filter(
+            usuario=request.user).filter(status="AG")
+
+        if not pedidos:
+            messages.add_message(request, constants.WARNING,
+                                 'Você não possui nenhum pedido de adoção.')
+
+        return render(request, 'ver_pedido_adocao.html', {'pedidos': pedidos})

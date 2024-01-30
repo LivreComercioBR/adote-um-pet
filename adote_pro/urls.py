@@ -28,6 +28,7 @@ urlpatterns = [
     path('auth/', include('adote_app.urls')),
     path('', lambda request: redirect('/auth/cadastro')),
     path('adote/', include('adocao.urls')),
+    path('quero_adotar/', include('quero_adotar.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=MEDIA_ROOT) + static(settings.STATIC_URL, document_root=STATIC_ROOT)
